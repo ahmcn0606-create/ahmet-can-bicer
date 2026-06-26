@@ -44,7 +44,7 @@
         <!-- SOL ÜST: MONOGRAM VE İSİM -->
         <div class="navbar-brand" style="display: flex; align-items: center; gap: 12px;">
             <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 35px; height: auto; display: block;">
-            <div class="brand-text" style="font-weight: 700; color: #ffffff; letter-spacing: 1px;">Ahmet Can BİÇER</div>
+            <div class="brand-text" style="font-weight: 700; color: #ffffff; letter-spacing: 1px;"></div>
         </div>
         
         <!-- SAĞ ÜST: LİNKLER VE TÜRK BAYRAĞI -->
@@ -72,10 +72,15 @@
         <h1 style="font-size: 36px; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Ahmet Can BİÇER</h1>
         <h2 style="font-size: 18px; color: #a0a0a0; font-weight: 500; letter-spacing: 1px; margin-bottom: 30px;">Elektronik Teknikeri</h2>
 
-        <!-- SAVUNMA TEKNOLOJİLERİ GIF ALANI -->
-        <div class="tech-video-container" style="max-width: 450px; margin: 0 auto 30px auto;">
-            <img src="savunma_teknoloji.mp4" alt="Teknoloji Vitrini" style="width: 100%; border-radius: 8px;">
+                <!-- SAVUNMA TEKNOLOJİLERİ MP4 VİDEO ALANI -->
+        <div class="tech-video-container" style="max-width: 450px; margin: 0 auto 30px auto; overflow: hidden; border-radius: 8px; line-height: 0;">
+            <!-- loops: sonsuz döngü, autoplay: otomatik oynat, muted: sessiz (şarttır), playsinline: mobil uyum -->
+            <video autoplay muted loop playsinline style="width: 100%; height: auto; display: block; border-radius: 8px; object-fit: cover;">
+                <source src="savunma_teknoloji.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
         </div>
+
 
         <a href="projelerim.html" class="btn" style="padding: 12px 30px; text-transform: uppercase;">Keşfetmeye Başla</a>
     </main>
