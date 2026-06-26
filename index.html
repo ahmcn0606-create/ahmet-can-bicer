@@ -1,170 +1,219 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TARAYICI SEKMESİNE İKON VRE BAŞLIK -->
+    <!-- TARAYICI SEKMESİNE İKON VE BAŞLIK -->
     <link rel="icon" type="image/png" href="ACB MONOGRAM_SİYAH.png">
     <title>Ahmet Can BİÇER │ Elektronik Teknikeri</title>
     
     <link rel="stylesheet" href="css-style.css">
     
     <style>
-        /* 3D Tünel Sayfasının En Arkada Sabit Kalması İçin */
-        #animasyon-frame {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            z-index: 1; /* En arkada */
-            pointer-events: none;
-        }
-        
-        /* Sayfayı kaydırabilmek için oluşturulan 4 katlı alan */
-        .scroll-space {
-            position: relative;
-            z-index: 2; /* 3D Tünelin üzerinde kayma alanı */
-            height: 400vh; /* 4 kat ekran uzunluğu */
-        }
-        
-        /* Tüm yazı ve menülerin sabit kalıp 3D boşlukta yüzmesi için */
-        .dom-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3; /* En üst katman */
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        /* Standart Sıfırlama ve Mobil Uyum Altyapısı */
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        
-        .navbar, .btn, .nav-links a, img {
-            pointer-events: auto; /* Butonların ve menünün tıklanmasını korur */
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Kaydırdıkça ekranda patlayacak sihirli 3D yazılar */
-        .slide-text {
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            opacity: 0;
-            text-align: center;
+        /* MOBİL UYUMLU ESNEK ÜST MENÜ */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
             width: 100%;
-            pointer-events: none;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        .text-1 { color: #00ffcc; text-shadow: 0 0 20px rgba(0, 255, 204, 0.6); }
-        .text-2 { color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
-        .text-3 { color: #00e5ff; text-shadow: 0 0 20px rgba(0, 229, 255, 0.6); }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding-right: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            height: 35px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a.active, .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* MOBİL UYUMLU ANA İÇERİK ALANI */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 100px 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+        }
+        .main-title {
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .main-subtitle {
+            font-size: 16px;
+            color: #00e5ff;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+        .btn-discover {
+            display: inline-block;
+            padding: 14px 40px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            font-weight: 600;
+            background: #ffffff;
+            color: #000000;
+            border-radius: 4px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-discover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* TELEFONLAR İÇİN ÖZEL SİHİRLİ DÜZELTME KODLARI (MEDIA QUERIES) */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+                flex-direction: column; /* Menüyü dikey hizaya çeker taşmayı önler */
+                gap: 12px;
+            }
+            .navbar-brand {
+                border-right: none; /* Mobilde dikey çizgiyi kaldırır */
+                height: auto;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap; /* Sığmayan linkleri alt satıra pürüzsüzce indirir */
+                justify-content: center;
+            }
+            .nav-links a {
+                font-size: 13px;
+            }
+            .main-container {
+                padding-top: 140px; /* Tepedeki menü kalınlaştığı için alanı genişletir */
+            }
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            .main-title {
+                font-size: 28px; /* Yazı boyutunu küçülterek ekrandan taşmasını engeller */
+            }
+            .main-subtitle {
+                font-size: 13px;
+                letter-spacing: 2px;
+                margin-bottom: 25px;
+            }
+            .btn-discover {
+                padding: 12px 30px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
-<body style="background-color: #010103; margin: 0; overflow-x: hidden;">
+<body>
 
-    <!-- BÜYÜTÜLMÜŞ SADE VE TEKNOLOJİK AÇILIŞ INTROSU -->
+    <!-- SADE VE TEKNOLOJİK AÇILIŞ INTROSU (HAFIZALI VE MOBİL UYUMLU) -->
     <div class="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0b0b; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.6s ease;">
-        <div style="position: relative; width: 160px; height: 160px; display: flex; justify-content: center; align-items: center;">
+        <div style="position: relative; width: 140px; height: 140px; display: flex; justify-content: center; align-items: center;">
             <div style="position: absolute; width: 100%; height: 100%; border: 3px solid rgba(255, 255, 255, 0.05); border-top: 3px solid #ffffff; border-radius: 50%; animation: spinRing 2s linear infinite;"></div>
-            <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Monogram" style="width: 100px; height: auto; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); animation: pulseGlow 2s ease-in-out infinite;">
+            <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Monogram" style="width: 85px; height: auto; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); animation: pulseGlow 2s ease-in-out infinite;">
         </div>
     </div>
 
     <style>
         @keyframes spinRing { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulseGlow {
-            0% { transform: scale(0.95); opacity: 0.6; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
-            50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(255,255,255,0.5)); }
-            100% { transform: scale(0.95); opacity: 0.6; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
+            0% { transform: scale(0.95); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.6; }
         }
     </style>
 
-    <!-- AYRI HTML DOSYASINDAN GELEN 3D ANIMASYONU EN ARKAYA BAĞLAYAN PENCERE -->
-    <iframe id="animasyon-frame" src="anasayfa_animasyon.html"></iframe>
-
-    <!-- SAYFAYI KAYDIRABİLMEK İÇİN GEREKLİ BOŞLUK KATMANI -->
-    <div class="scroll-space"></div>
-
-    <!-- ÜST KATMAN (YAZILAR, LOGOLAR VE BUTONLAR BURADA YÜZECEK) -->
-    <div class="dom-overlay">
-
-        <!-- ÜST MENÜ -->
-        <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(11, 11, 11, 0.6); backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; z-index: 998; box-sizing: border-box; border-bottom: 1px solid rgba(255,255,255,0.03);">
-            <div class="navbar-brand" style="display: flex; align-items: center; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.1); height: 40px;">
-                <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 38px; height: auto; display: block;">
-            </div>
-            
-            <ul class="nav-links" style="display: flex; align-items: center; gap: 20px; list-style: none; margin: 0; padding: 0;">
-                <li><a href="#" class="active" style="color: #ffffff; text-decoration: none; font-weight: 600;">Ana Sayfa</a></li>
-                <li><a href="hakkimda.html" style="color: #a0a0a0; text-decoration: none;">Hakkımda</a></li>
-                <li><a href="projelerim.html" style="color: #a0a0a0; text-decoration: none;">Projelerim</a></li>
-                <li><a href="iletisim.html" style="color: #a0a0a0; text-decoration: none;">İletişim</a></li>
-                
-                <li style="display: flex; align-items: center; gap: 8px; padding-left: 15px; border-left: 1px solid rgba(255,255,255,0.1); cursor: default;">
-                    <span style="font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px;">TR</span>
-                    <img src="turk-bayraki.png" alt="Türk Bayrağı" style="width: 24px; height: auto; display: block; border-radius: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-                </li>
-            </ul>
-        </nav>
-
-        <!-- KÜNYE VE BAŞLANGIÇ ALANI -->
-        <main class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; width: 100%; box-sizing: border-box; padding-top: 60px;">
-            <div style="margin-bottom: 20px;">
-                <img src="anasayfa_fotograf.jpeg" alt="Ahmet Can Biçer" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
-            </div>
-            <h1 style="font-size: 38px; font-weight: 800; color: #ffffff; margin-bottom: 8px; letter-spacing: 1px;">Ahmet Can BİÇER</h1>
-            <h2 style="font-size: 15px; color: #00e5ff; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Elektronik Teknikeri</h2>
-            
-            <div style="margin-top: 40px; color: #666; font-size: 12px; letter-spacing: 2px;">
-                🖱️ TÜNELDE İLERLEMEK İÇİN AŞAĞI KAYDIRIN
-            </div>
-        </main>
-
-        <!-- TÜNEL İÇİNDE PATLAYACAK SİHİRLİ 3D YAZILAR -->
-        <div class="slide-text text-1">SİBER RADAR SİSTEMLERİ</div>
-        <div class="slide-text text-2">SAVUNMA TEKNOLOJİLERİ</div>
-        <div class="slide-text text-3">ACB PORTFOLYO</div>
-
-        <!-- KEŞFET BUTONU VE FOOTER -->
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; background: transparent;">
-            <a href="projelerim.html" class="btn" style="padding: 13px 38px; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; font-weight: 600; background: #ffffff; color: #000000; border-radius: 4px; text-decoration: none; box-shadow: 0 10px 25px rgba(255,255,255,0.15);">Projeleri İncele</a>
-            <footer style="color: #444; font-size: 11px;">&copy; 2026 Ahmet Can Biçer. Tüm Hakları Saklıdır.</footer>
+    <!-- ÜST MENÜ -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 35px; height: auto; display: block;">
         </div>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="active">Ana Sayfa</a></li>
+            <li><a href="hakkimda.html">Hakkımda</a></li>
+            <li><a href="projelerim.html">Projelerim</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            
+            <!-- EN SAĞ: TR YAZISI VE KESKİN BAYRAK -->
+            <li style="display: flex; align-items: center; gap: 6px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.1); cursor: default;">
+                <span style="font-size: 12px; font-weight: 700; color: #ffffff;">TR</span>
+                <img src="turk-bayraki.png" alt="Türk Bayrağı" style="width: 22px; height: auto; display: block; border-radius: 2px;">
+            </li>
+        </ul>
+    </nav>
 
-    </div>
+    <!-- ANA ALAN VE PROFİL KÜNYESİ -->
+    <main class="main-container">
+        <img src="anasayfa_fotograf.jpeg" alt="Ahmet Can Biçer" class="profile-img">
+        <h1 class="main-title">Ahmet Can BİÇER</h1>
+        <div class="main-subtitle">Elektronik Teknikeri</div>
+        <a href="projelerim.html" class="btn-discover">Keşfetmeye Başla</a>
+    </main>
 
-    <!-- SADECE YAZILARIN KAYMA EFEKTİNİ YÖNETEN GSAP SCRIPT KÜTÜPHANELERİ -->
-    <script src="https://cloudflare.com"></script>
-    <script src="https://cloudflare.com"></script>
+    <!-- FOOTER -->
+    <footer style="padding: 25px; text-align: center; color: #555; font-size: 12px; background: rgba(10, 10, 10, 0.5); width: 100%;">
+        &copy; 2026 Ahmet Can Biçer. Tüm Hakları Saklıdır.
+    </footer>
 
+    <!-- TEK SEFERLİK INTRO SİSTEMİ SCRIPT -->
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Sayfa kaydıkça index.html'deki yazıların sırayla patlamasını yöneten motor
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".scroll-space",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1
-            }
-        });
-
-        tl.to(".text-1", { opacity: 1, scale: 1.1, duration: 2 }).to(".text-1", { opacity: 0, scale: 2.2, duration: 2 })
-          .to(".text-2", { opacity: 1, scale: 1.1, duration: 2 }).to(".text-2", { opacity: 0, scale: 2.2, duration: 2 })
-          .to(".text-3", { opacity: 1, scale: 1.1, duration: 2 }).to(".text-3", { opacity: 0, scale: 0.6, duration: 2 });
-
-        // KALICI TEK SEFERLİK INTRO SİSTEMİ
         const preloader = document.querySelector('.preloader');
         if (localStorage.getItem('introShownOnce')) {
             if (preloader) { preloader.style.display = 'none'; }
@@ -181,5 +230,6 @@
             localStorage.setItem('introShownOnce', 'true');
         }
     </script>
+
 </body>
 </html>
