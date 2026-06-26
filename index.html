@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <!-- AÇILIŞ LOGOSU ANİMASYONU (TAMAMEN DÜZELDİ) -->
+    <!-- 3 SANİYELİK PARLAYAN AÇILIŞ LOGOSU -->
     <div class="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0b0b; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.6s ease;">
         <div style="position: relative; width: 140px; height: 140px; display: flex; justify-content: center; align-items: center;">
             <div style="position: absolute; width: 100%; height: 100%; border: 3px solid rgba(255, 255, 255, 0.05); border-top: 3px solid #ffffff; border-radius: 50%; animation: spinRing 2s linear infinite;"></div>
@@ -45,13 +45,12 @@
         @keyframes pulseGlow { 0% { transform: scale(0.95); opacity: 0.6; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.6; } }
     </style>
 
-    <!-- ÜST MENÜ (PROJELERİM KALDIRILDI) -->
+    <!-- MENÜDE SADECE HAKKIMDA VE İLETİŞİM VAR -->
     <nav class="navbar">
         <div class="navbar-brand">
             <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 35px; height: auto; display: block;">
         </div>
         <ul class="nav-links">
-            <li><a href="#" style="color: #ffffff; font-weight: 600;">Ana Sayfa</a></li>
             <li><a href="hakkimda.html">Hakkımda</a></li>
             <li><a href="iletisim.html">İletişim</a></li>
             <li style="display: flex; align-items: center; gap: 6px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.1);">
@@ -68,14 +67,12 @@
         <a href="hakkimda.html" class="btn-discover">Keşfetmeye Başla</a>
     </main>
 
-    <footer style="padding: 25px; text-align: center; color: #555; font-size: 12px; background: rgba(10, 10, 10, 0.5); width: 100%; border-top: 1px solid rgba(255,255,255,0.02);">
-        &copy; 2026 Ahmet Can Biçer. Tüm Hakları Saklıdır.
-    </footer>
+    <footer style="padding: 25px; text-align: center; color: #555; font-size: 12px; background: rgba(10, 10, 10, 0.5); width: 100%; border-top: 1px solid rgba(255,255,255,0.02);">&copy; 2026 Ahmet Can Biçer. Tüm Hakları Saklıdır.</footer>
 
-    <!-- LOGONUN EKRANDAN SİLİNMESİNİ SAĞLAYAN KRİTİK SCRIPT -->
     <script>
+        // Tarayıcı hafızasını sıfırlayarak introyu ilk girişler için kesin görünür yaparız
         const preloader = document.querySelector('.preloader');
-        if (localStorage.getItem('introShownOnce')) {
+        if (sessionStorage.getItem('introSeenSession')) {
             if (preloader) { preloader.style.display = 'none'; }
         } else {
             window.addEventListener('load', () => {
@@ -87,7 +84,7 @@
                     }
                 }, 3000); 
             });
-            localStorage.setItem('introShownOnce', 'true');
+            sessionStorage.setItem('introSeenSession', 'true');
         }
     </script>
 </body>
