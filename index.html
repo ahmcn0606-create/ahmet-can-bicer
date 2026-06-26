@@ -98,23 +98,16 @@
 
     </div>
 
-    <!-- 3D MOTORU VE YENİ OLUŞTURDUĞUN ANİMASYON DOSYASININ BAĞLANTILARI -->
+    <!-- 3D KÜTÜPHANESİ VE DIŞARIDAN OKUNAN ANİMASYON DOSYASI -->
     <script src="https://cloudflare.com"></script>
     <script src="anasayfa-animasyon.js"></script>
 
-    <!-- INTRO ZAMANLAYICI SCRIPT -->
-        <!-- INTRO YÖNETİMİ (TARAYICI HAFIZALI - TEK SEFERLİK ÇALIŞMA) -->
+    <!-- INTRO HAFIZA KONTROLLÜ SCRIPT (YENİLEMEDE TEKRAR OYNAMAZ) -->
     <script>
         const preloader = document.querySelector('.preloader');
-        
-        // Tarayıcı hafızasını kontrol et (Bu sekmede intro daha önce izlendi mi?)
         if (sessionStorage.getItem('portfolioIntroSeen')) {
-            // Eğer daha önce izlendiyse, introyu anında yok et ve bekleme yaptırma
-            if (preloader) {
-                preloader.style.display = 'none';
-            }
+            if (preloader) { preloader.style.display = 'none'; }
         } else {
-            // Eğer siteye İLK KEZ giriliyorsa, introyu oynat ve hafızaya kaydet
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     if (preloader) {
@@ -122,13 +115,11 @@
                         preloader.style.opacity = '0';
                         setTimeout(() => preloader.style.display = 'none', 600);
                     }
-                }, 2000); // 3 saniyelik oynatma süresi
+                }, 3000); 
             });
-            // Hafızaya "Görüldü" işaretini bırak
             sessionStorage.setItem('portfolioIntroSeen', 'true');
         }
     </script>
-
 
 </body>
 </html>
