@@ -9,29 +9,22 @@
     <title>Ahmet Can BİÇER │ Elektronik Teknikeri</title>
     
     <link rel="stylesheet" href="css-style.css">
+    
+    <!-- 3D Etkileşim İçin Gerekli Spline Kütüphanesi -->
+    <script type="module" src="https://unpkg.com"></script>
 </head>
 <body>
 
     <!-- BÜYÜTÜLMÜŞ SADE VE TEKNOLOJİK AÇILIŞ INTROSU -->
     <div class="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0b0b; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.6s ease;">
-        
-        <!-- %50 Büyütülmüş Efekt Grubu -->
         <div style="position: relative; width: 160px; height: 160px; display: flex; justify-content: center; align-items: center;">
-            
-            <!-- Etrafında Hafifçe Dönen İnce Teknoloji Halkası -->
             <div style="position: absolute; width: 100%; height: 100%; border: 3px solid rgba(255, 255, 255, 0.05); border-top: 3px solid #ffffff; border-radius: 50%; animation: spinRing 2s linear infinite;"></div>
-            
-            <!-- Ortada Yumuşakça Parlayarak Büyüyen Beyaz Monogram (Büyütüldü) -->
             <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Monogram" style="width: 100px; height: auto; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); animation: pulseGlow 2s ease-in-out infinite;">
         </div>
     </div>
 
-    <!-- Efektlerin CSS Kodları -->
     <style>
-        @keyframes spinRing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spinRing { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulseGlow {
             0% { transform: scale(0.95); opacity: 0.6; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
             50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(255,255,255,0.5)); }
@@ -39,12 +32,11 @@
         }
     </style>
 
-    <!-- ÜST MENÜ (SOLDA MONOGRAM, SAĞDA TR BAYRAK ENTEGRELİ) -->
-    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(11, 11, 11, 0.8); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 998;">
-        <!-- SOL ÜST: MONOGRAM VE İSİM -->
-        <div class="navbar-brand" style="display: flex; align-items: center; gap: 12px;">
-            <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 35px; height: auto; display: block;">
-            <div class="brand-text" style="font-weight: 700; color: #ffffff; letter-spacing: 1px;"></div>
+    <!-- ÜST MENÜ (SOLDA SABİT MONOGRAM, SAĞDA TR BAYRAK ENTEGRELİ) -->
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(11, 11, 11, 0.8); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 998; box-sizing: border-box;">
+        <!-- SOL ÜST: ÇİZGİSİ DÜZELTİLMİŞ MONOGRAM ALANI -->
+        <div class="navbar-brand" style="display: flex; align-items: center; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.1); height: 40px;">
+            <img src="ACB MONOGRAM_BEYAZ.png" alt="ACB Logo" style="width: 38px; height: auto; display: block;">
         </div>
         
         <!-- SAĞ ÜST: LİNKLER VE TÜRK BAYRAĞI -->
@@ -54,7 +46,6 @@
             <li><a href="projelerim.html" style="color: #a0a0a0; text-decoration: none;">Projelerim</a></li>
             <li><a href="iletisim.html" style="color: #a0a0a0; text-decoration: none;">İletişim</a></li>
             
-            <!-- EN SAĞ: YAN YANA TR YAZISI VE TÜRK BAYRAĞI -->
             <li style="display: flex; align-items: center; gap: 8px; padding-left: 15px; border-left: 1px solid rgba(255,255,255,0.1); cursor: default;">
                 <span style="font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px;">TR</span>
                 <img src="turk-bayraki.png" alt="Türk Bayrağı" style="width: 24px; height: auto; display: block; border-radius: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
@@ -62,31 +53,32 @@
         </ul>
     </nav>
 
-    <!-- ANA ALAN VE PROFİL RESMİ -->
-    <main class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh; text-align: center; padding: 100px 20px 40px 20px;">
+    <!-- ANA ALAN VE SİHİRLİ 3D SAVUNMA SANAYİİ SAHNESİ -->
+    <main class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 120px 20px 60px 20px; box-sizing: border-box; background: #0b0b0b;">
         
-        <div style="margin-bottom: 25px;">
-            <img src="anasayfa_fotograf.jpeg" alt="Ahmet Can Biçer" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+        <div style="margin-bottom: 20px;">
+            <img src="anasayfa_fotograf.jpeg" alt="Ahmet Can Biçer" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
         </div>
 
-        <h1 style="font-size: 36px; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Ahmet Can BİÇER</h1>
-        <h2 style="font-size: 18px; color: #a0a0a0; font-weight: 500; letter-spacing: 1px; margin-bottom: 30px;">Elektronik Teknikeri</h2>
+        <h1 style="font-size: 38px; font-weight: 800; color: #ffffff; margin-bottom: 5px; letter-spacing: 0.5px;">Ahmet Can BİÇER</h1>
+        <h2 style="font-size: 16px; color: #a0a0a0; font-weight: 500; letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase;">Elektronik Teknikeri</h2>
 
-                <!-- SAVUNMA TEKNOLOJİLERİ MP4 VİDEO ALANI -->
-        <div class="tech-video-container" style="max-width: 450px; margin: 0 auto 30px auto; overflow: hidden; border-radius: 8px; line-height: 0;">
-            <!-- loops: sonsuz döngü, autoplay: otomatik oynat, muted: sessiz (şarttır), playsinline: mobil uyum -->
-            <video autoplay muted loop playsinline style="width: 100%; height: auto; display: block; border-radius: 8px; object-fit: cover;">
-                <source src="savunma_teknoloji.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor.
-            </video>
+        <!-- TAM ORTALI, INTERAKTIF 3D SAVUNMA SANAYII MODEL VİTRİNİ -->
+        <div class="3d-scene-container" style="width: 100%; max-width: 800px; height: 450px; margin: 0 auto 40px auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative;">
+            <!-- Bilimkurgu / Savunma Sanayii İstasyon Temalı İnteraktif Sihirli 3D Model -->
+            <spline-viewer url="https://spline.design" style="width: 100%; height: 100%;"></spline-viewer>
+            
+            <!-- Kullanıcı Yardım İpucu -->
+            <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); padding: 6px 14px; border-radius: 20px; font-size: 11px; color: #888; letter-spacing: 1px; pointer-events: none;">
+                💡 Fare tekerleğiyle yaklaşın ve sürükleyerek 3D keşfedin
+            </div>
         </div>
 
-
-        <a href="projelerim.html" class="btn" style="padding: 12px 30px; text-transform: uppercase;">Keşfetmeye Başla</a>
+        <a href="projelerim.html" class="btn" style="padding: 14px 36px; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; font-weight: 600;">Keşfetmeye Başla</a>
     </main>
 
     <!-- FOOTER -->
-    <footer style="padding: 20px; text-align: center; color: #666; font-size: 13px;">
+    <footer style="padding: 30px; text-align: center; color: #444; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.02); background: #070707;">
         &copy; 2026 Ahmet Can Biçer. Tüm Hakları Saklıdır.
     </footer>
 
