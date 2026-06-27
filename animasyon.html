@@ -14,35 +14,32 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Yıldızları oluştur ve her birine kayma (drift) hızı ver
         const stars = Array.from({length: 400}, () => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             size: Math.random() * 1.5,
             opacity: Math.random(),
             color: Math.random() > 0.9 ? '#ff0033' : '#ffffff',
-            driftX: (Math.random() - 0.5) * 0.2, // X yönünde yavaş kayma
-            driftY: (Math.random() - 0.5) * 0.2  // Y yönünde yavaş kayma
+            driftX: (Math.random() - 0.5) * 0.2,
+            driftY: (Math.random() - 0.5) * 0.2
         }));
+
+        let shootingStar = null;
 
         function animate() {
             ctx.fillStyle = "#000"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Karadelik Merkezi (Sabit)
+            // Karadelik Merkezi
             let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 250);
             grad.addColorStop(0, 'rgba(10, 0, 5, 0.8)'); 
             grad.addColorStop(1, 'transparent');
-            ctx.fillStyle = grad; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Yıldızları güncelle ve çiz
+            // Normal Yıldızların Kayma Hareketi
             stars.forEach(s => {
-                // Sadece kayma hareketini uygula
                 s.x += s.driftX;
                 s.y += s.driftY;
-
-                // Ekran sınırlarında döngü
                 if (s.x < 0) s.x = canvas.width; if (s.x > canvas.width) s.x = 0;
                 if (s.y < 0) s.y = canvas.height; if (s.y > canvas.height) s.y = 0;
 
@@ -52,6 +49,24 @@
                 ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                 ctx.fill();
             });
+
+            // Yıldız Kayma Efekti
+            if (!shootingStar && Math.random() < 0.005) { // Rastgele tetikleme
+                shootingStar = { x: Math.random() * canvas.width, y: 0, speed: 10 + Math.random() * 10 };
+            }
+            if (shootingStar) {
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(shootingStar.x, shootingStar.y);
+                ctx.lineTo(shootingStar.x + 50, shootingStar.y + 50);
+                ctx.stroke();
+                shootingStar.x += shootingStar.speed;
+                shootingStar.y += shootingStar.speed;
+                if (shootingStar.x > canvas.width || shootingStar.y > canvas.height) shootingStar = null;
+            }
+
+            ctx.globalAlpha = 1.0;
             requestAnimationFrame(animate);
         }
         animate();
